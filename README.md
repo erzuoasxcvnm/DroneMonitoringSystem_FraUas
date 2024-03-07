@@ -1,17 +1,17 @@
-# Contributor / Students 
+> ## :man_technologist: :woman_technologist: Contributor / Students 
 <sup>ORDER BY LAST_NAME ASC</sup><br>
 Asghar Yassine<br>Bromkamp Noel<br>Froussos Flynn<br>Islam Muntaha<br>Islam Safana
 
-# App Screenshots : 
+> ## :strawberry: App Screenshots : 
 ![Health Check View!](app/HealthCheckView.png)
 ![Drone Catalogue View!](app/DroneCatalogueView.png)
 ![Flight Dynamics View!](app/FlightDynamicsView.png)
 ![Drone History View!](app/DroneHistoryView.png)
 
 
-# Program Start Guide
+> ## :strawberry: Program Start Guide
 
-## Alternative 1: Double-Click Start
+> ### :strawberry: Alternative 1: Double-Click Start
 
 To start the program using this method, simply double-click on the `.jar` file of the program.
 
@@ -19,7 +19,7 @@ Upon double-clicking:
 1. The program will read the default configuration stored inside the `.jar` file.
 2. The program will also create a `logs` folder in the same directory where the `.jar` file is located. For instance, `$PWD/logs/0.log`.
 
-## Alternative 2: Command Line Start
+> ### :strawberry: Alternative 2: Command Line Start
 
 Starting your program from the command line provides access to hidden features. The order of arguments is not important.
 
