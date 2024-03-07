@@ -47,7 +47,7 @@ Starting your program from the command line provides access to hidden features. 
    java -jar filename.jar --config path/to/your/config/file.yaml
    ```
  
-2. **Use a Custom Configuration File:**
+2. **Specify a Custom Log File:**
    
    This feature allows you to decide where your log files should be stored.
 To use a custom log file, enter the following command in your terminal:
