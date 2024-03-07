@@ -1,0 +1,10 @@
+client:
+  user: 'WROngXBvNB=='
+  password: 'WRONGK3jeFB5YwU3YXBnkshjU3V6bVZzOUOOPkE0'
+  token: 'WRONG7UsZTk1NGQzODFmODE3NTU3MTVhYTg4ZTMyLGVhYzk3NDc8NWI5MTL0MQ=='
+  domain: 'https://dronesim.facets-labs.com'
+  agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Firefox/97.0'
+  endpoints:
+    drones: '/api/drones'
+    types: '/api/dronetypes'
+    dynamics: '/api/dronedynamics'

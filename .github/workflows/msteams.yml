@@ -1,0 +1,69 @@
+name: Notify Teams
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  notify-teams:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          repository: yassineasghar/DRONE_MONITORING_SYSTEM
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ssh-strict: true
+          persist-credentials: true
+          clean: true
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+          set-safe-directory: true
+
+      - name: Get branch and author
+        id: get_branch
+        run: |
+          branch="${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref }}"
+          branch_cleaned="${branch#refs/heads/}"
+          echo "::set-output name=branch::${branch_cleaned}"
+          echo "::set-output name=author::${{ github.actor }}"
+
+      - name: Get commit SHA
+        id: get_commit_sha
+        run: |
+          commit_sha="$(git log --format=%H -n 1)"
+          echo "::set-output name=commit_sha::${commit_sha}"
+
+      - name: Notify Teams
+        run: |
+          branch="${{ steps.get_branch.outputs.branch }}"
+          author="${{ steps.get_branch.outputs.author }}"
+          commit_sha="${{ steps.get_commit_sha.outputs.commit_sha }}"
+          webhook_url="${{ secrets.TEAMS_WEBHOOK }}"
+          commit_link="https://github.com/yassineasghar/DRONE_MONITORING_SYSTEM/commit/${commit_sha}"
+          message="**- CHANGES MADE IN BRANCH:** \n \`${branch}\` \n\n **- BY:** \n \`${author}\` \n\n **- COMMIT MESSAGE:** \n \`${{ github.event.head_commit.message }}\`"
+          button="**[View Commit](${commit_link})**"
+          
+          json_payload="{
+            \"type\": \"MessageCard\",
+            \"context\": \"http://schema.org/extensions\",
+            \"themeColor\": \"0076D7\",
+            \"title\": \"GitHub Repository Update\",
+            \"text\": \"${message}\",
+            \"potentialAction\": [
+              {
+                \"@type\": \"OpenUri\",
+                \"name\": \"View Commit\",
+                \"targets\": [
+                  { \"os\": \"default\", \"uri\": \"${commit_link}\" }
+                ]
+              }
+            ]
+          }"
+          
+          curl -H "Content-Type: application/json" -d "${json_payload}" -X POST "${webhook_url}"
